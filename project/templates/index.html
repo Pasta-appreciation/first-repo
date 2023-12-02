@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>DjangoでTailwindCSSを使用する方法</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
   </head>
   <body>
     <div class="text-center m-5">
@@ -14,6 +16,7 @@
         <div class="text-3xl font-bold">DjangoでTailwindCSSを使用する方法</div>
       </div>
     </div>
-    <button class="btn btn-neutral">hello daisyui</button>
+    <button class="btn btn-neutral justify-center">hello daisyui</button>
+    <h1 id="hello">おはよう</h1>
   </body>
 </html>

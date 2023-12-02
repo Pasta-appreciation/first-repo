@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sign up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">  
+</head>
+<body>
+    <div class="flex h-screen w-screen justify-center items-center original-gradient">
+        <div class="block bg-white rounded-2xl pt-3 pb-3 pr-10 pl-10">
+            <h2 class="font-bold text-3xl font-serif text-center mb-3">Sign up</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                {% if field.name == 'is_senior'%}
+                    <div class="form-control">
+                        <label class="label cursor-pointer">
+                            <span class="label-text mr-3">募集側の方はこちらにチェック</span> 
+                            <input id="{{field.id_for_label}}" name="{{field.name}}" type="checkbox" class="checkbox" />
+                        </label>
+                    </div>
+                {% else %}
+                    <div>
+                        <label class="text-lg" for="Username">{{ field.label }}:</label><br>
+                        <input class="input input-bordered w-full max-w-xs mb-3" type="{{field.widget_type}}" name="{{field.name}}" maxlength="150" autofocus="" required="" id="{{ field.id_for_label}}">
+                    <div>
+                    {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {%endfor%}
+                {% endif%}
+                {%endfor%}
+                <div class="flex flex-row-reverse">
+                    <button class="btn btn-outline mt-3 w-16"><input type="submit" value='登録'></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>sign up</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css"/>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">  
+</head>
+    <body>
+        <div class="flex h-screen w-screen justify-center items-center original-gradient">
+            <div class="block bg-white rounded-2xl p-10 pb-3">
+                {% if user.is_authenticated %}
+                    <h2>{{user}}でログインしています</h2>
+                {% else %}
+                <h1 class="font-bold text-3xl font-serif text-center">Login</h1>
+                    <form class="block" method="post">
+                        {% csrf_token %}
+                        <div>
+                            <label class="text-lg" for="Username">User name:</label>
+                            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs mb-3" name="username" id="id_username">
+                        </div>
+                        <div>
+                            <label class="text-lg" for="Password">Password:</label>
+                            <input type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs mb-3" name="password" id="id_password">
+                        </div>
+                        {% if form.errors %}
+                            <p class="" style="color:red">ユーザー名とパスワードが一致しません。</p>
+                        {% endif %}
+                        <div class="flex flex-row-reverse">
+                            <button class="btn btn-outline mt-3 w-16"><input type="submit" value='次へ'></button>
+                        </div>
+                    </form>
+                {%endif%}
+                <div class="flex flex-row-reverse mt-2">
+                    <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'accounts:signup' %}>新規登録</a></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

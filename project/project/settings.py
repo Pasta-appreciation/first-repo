@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ 
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates/accounts'),
+            os.path.join(BASE_DIR, 'templates/offering'),
+            os.path.join(BASE_DIR, 'templates/senior'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -130,3 +134,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#for login funciton
+AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_REDIRECT_URL = 'accounts:login_success'
+LOGIN_URL = 'accounts:login'
