@@ -13,9 +13,13 @@
         <div class="flex h-screen w-screen justify-center items-center original-gradient">
             <div class="block bg-white rounded-2xl p-10 pb-3">
                 {% if user.is_authenticated %}
-                    <h2>{{user}}でログインしています</h2>
+                    <h2 class="text-4xl text-center">{{user}}でログインしています</h2>
+                    <div class="grid grid-rows-none grid-cols-3">
+                        <p style="color: blue" class="text-2xl col-start-1 col-end-2"><a href={% url 'accounts:logout' %}>ログアウトする　　</a></p>
+                        <p style="color: blue" class="text-2xl col-start-3 col-end-4"><a href={% url 'accounts:login_success' %}>一覧ページへ</a></p>
+                    </div>
                 {% else %}
-                <h1 class="font-bold text-3xl font-serif text-center">Login</h1>
+                <h1 class="font-bold text-3xl font-serif text-center">ログイン</h1>
                     <form class="block" method="post">
                         {% csrf_token %}
                         <div>
@@ -33,10 +37,11 @@
                             <button class="btn btn-outline mt-3 w-16"><input type="submit" value='次へ'></button>
                         </div>
                     </form>
-                {%endif%}
                 <div class="flex flex-row-reverse mt-2">
                     <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'accounts:signup' %}>新規登録</a></p>
                 </div>
+                {%endif%}
+
             </div>
         </div>
     </body>
