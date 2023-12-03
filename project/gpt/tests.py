@@ -12,7 +12,6 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.text_splitter import CharacterTextSplitter
 
-import logging
 from django.conf import settings
 
 avoid_embedding = "off"
