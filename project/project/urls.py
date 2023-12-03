@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.index_template, name='index_template'),
     path('', include('accounts.urls')),
+    path('', include('gpt.urls')),
 ]
