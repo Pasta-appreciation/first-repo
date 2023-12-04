@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import CustomUser
 
 # Create your models here.
 #以下chatGPTに投げるためのPronpt
@@ -48,40 +49,42 @@ description :企業の説明
 from django.db import models
 
 class Senior(models.Model):
-    senior_id = models.AutoField(primary_key=True)
+    senior_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)#users紐付け
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=255)
-    age = models.IntegerField()
-    address = models.CharField(max_length=255)
-    description = models.TextField()
-    face_path = models.ImageField(upload_to='senior_faces/')
+    name = models.CharField(max_length=255) #default指定しなきゃ
+    age = models.IntegerField(blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    face_path = models.ImageField(upload_to='/images/senior_faces/', blank=True, null=True)
     is_wanted = models.BooleanField(default=False)
 
-class Matching(models.Model):
-    matching_id = models.AutoField(primary_key=True)
-    senior = models.ForeignKey(Senior, on_delete=models.CASCADE)
-    job_id = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    state = models.IntegerField()
-    matched_on = models.DateTimeField(null=True, blank=True)
-
 class Company(models.Model):
-    company_id = models.AutoField(primary_key=True)
+    company_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)#users紐付け
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=255)
-    address = models.CharField(max_length=255)
-    industry = models.CharField(max_length=255)
-    homepage_url = models.URLField(max_length=200)
+    name = models.CharField(max_length=255,blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    industry = models.CharField(max_length=255,blank=True, null=True)
+    homepage_url = models.URLField(max_length=200, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    pic_path = models.ImageField(upload_to='/images/company_pics/', blank=True, null=True)
 
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    number_of_people = models.IntegerField()
+    number_of_people = models.IntegerField(default=0)
     description = models.TextField()
-    is_public = models.BooleanField(default=False)
+    is_public = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
+
+class Matching(models.Model):
+    matching_id = models.AutoField(primary_key=True)
+    senior = models.ForeignKey(Senior, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Job, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    state = models.IntegerField() #1=応募者からの申請、2=企業からの申請、3=マッチング成立、4=マッチング不成立
+    matched_on = models.DateTimeField(null=True, blank=True)
