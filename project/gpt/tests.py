@@ -11,19 +11,37 @@ from langchain.vectorstores.chroma import Chroma
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.text_splitter import CharacterTextSplitter
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains.openai_functions import create_structured_output_chain
 
 from django.conf import settings
+from langchain.pydantic_v1 import BaseModel, Field
 
 avoid_embedding = "off"
+"""
+class Bussiness(getTableOfContents):
+    def __init__(self, collection_name):
+        super().__init__(collection_name)
+        
+    class DefineVariable(BaseModel):
+        bussiness :bool = Field(..., discription="Does the document include the business or not?")
+        
+    def contains_or_not(self):
+        query = "A statement about the company's business"
+        result = {"category": "事業内容", "TorF": super().contains_or_not(self.DefineVariable, query).bussiness}
+        return result
+    
+    def create_content(self):
+        query = "'instrucrion':Please describe the business of this company in an easy-to-understand format. (e.g. bulleted list) 'format':日本語で回答してください。"
+        return super().create_content(query)
+"""    
+class DefineVariableSenior(BaseModel):
+        company_id :int = Field(..., discription="会社のID")
+        job_id :int = Field(..., discription="候補者が応募したいと思う案件のID")
+        Why_should_applicant_apply_for_the_project :str = Field(..., discription="候補者がこの案件に応募すべきであるという理由について200字程度で記述")
 
 def make_show_business():
     
-    #For spliting a text
-    #loader = PyPDFLoader(f"{pdf_path}")
-    #MinerLoaderめちゃ重くない？？
-    #loader = PDFMinerLoader(f"{pdf_path}")
-    #text_spliter = CharacterTextSplitter(chunk_size=400)
-
     discription = "\
     #company_number:1\
     FutureTech Innovationsについて\
@@ -92,7 +110,7 @@ def make_show_business():
     興味をお持ちいただけた方は、履歴書と職務経歴書を添えて、recruitment@futuretechinnovations.com までご応募ください。"
     
     text_splitter = CharacterTextSplitter(
-    separator = "##",
+    separator = "\n\n",
     chunk_size = 1000,
     chunk_overlap  = 200,
     length_function = len,
@@ -101,27 +119,21 @@ def make_show_business():
     
     pages = text_splitter.create_documents([discription])
 
-    #OpenAI's apikey is already set to load from environment variables.
-    openai.api_key = "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"
-    os.environ["OPENAI_API_KEY"] = openai.api_key
+    #openai.api_key = os.environ["OPENAI_API_KEY"]
     llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
     
     openai_ef = OpenAIEmbeddings()
     persist_path = "/Users/kazukikuriyama/hackathon/login-func/first-repo/project" + "/Chroma"
     
-    """
     if (avoid_embedding != "on"):
-        logging.debug("debug off")
         #Note that if a collection with the same collection name already exists, a new one will be created separately.
-        collection = Chroma(collection_name="langchain_test", embedding_function=openai_ef, persist_directory=persist_path)
+        collection = Chroma(collection_name="langchain_test2", embedding_function=openai_ef, persist_directory=persist_path)
         vectorstore = collection.from_documents(pages,embedding=openai_ef, persist_directory=persist_path)
     else:
         client = chromadb.PersistentClient(path=persist_path)
         vectorstore = Chroma(collection_name="langchain_test", client=client, embedding_function=openai_ef)
-    
-    pdf_qa = ConversationalRetrievalChain.from_llm(llm, vectorstore.as_retriever(), return_source_documents=True, verbose=True)
 
-    query = "##以下の人物にとってふさわしい案件とその理由を教えてください。offer_idも返答してください。\
+    query = "\
     応募者: 田中 明子\
     1. AIシステムエンジニア\
     学歴:\
@@ -141,14 +153,36 @@ def make_show_business():
     \
     GitHub プロフィール\
     開発した機械学習モデルやプロジェクトのソースコード"
-    chat_history = []
 
-    result = pdf_qa({"question": query, "chat_history": chat_history})
-    """
+    retrieved_docs = vectorstore.as_retriever().invoke(query)
+    print(retrieved_docs[0].page_content)
     
-    #return result["answer"]
-    return pages
+    #pdf_qa = ConversationalRetrievalChain.from_llm(llm, vectorstore.as_retriever(), return_source_documents=True, verbose=True)
+
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+    prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", "You are a world class algorithm for extracting information in structured formats."),
+                ("human", "Use the given format to extract information from the following input: {input}"),
+                ("human", "Tip: Make sure to answer in the correct format"),
+                ("human", "The canditate profiles are the following data:"+ query)
+            ]
+        )       
+
+
+    chain_input = f"\n{'-' * 100}\n".join([f"Document {i+1}:\n\n" + d.page_content for i, d in enumerate(retrieved_docs)])
+    max_length = 3000
+    trimmed_retrieved_docs = chain_input[:max_length]
+
+    #chain
+    chain = create_structured_output_chain(DefineVariableSenior, llm, prompt, verbose=True)
+    print("beforechain\n")
+    print(chain_input)
+    table_of_contents = chain.run(trimmed_retrieved_docs)
+
+    return table_of_contents
 
 res = make_show_business()
 
 print(res)
+
