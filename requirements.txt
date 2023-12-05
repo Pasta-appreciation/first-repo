@@ -2,7 +2,7 @@ Django==3.2.13
 langchain
 openai
 chroma
-pilow
+pillow
 tiktoken
 coredjango-cors-headers
 
