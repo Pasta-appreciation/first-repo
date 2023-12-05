@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Senior, Company, Company, Matching
+from .models import Senior, Company, Job, Matching
 
 # Create your views here.
 class CreateSeniorEntryView(LoginRequiredMixin,CreateView):
@@ -16,4 +16,11 @@ class CreateSeniorEntryView(LoginRequiredMixin,CreateView):
         entry.user = self.request.user
         entry.save()
         return super().form_valid(form)
-    
+
+def search_jobs(request):
+    keyword = request.GET.get('keyword', '')
+    area = request.GET.get('area', '')
+    keyword = request.GET.get('keyword', '')
+    area = request.GET.get('area', '')
+    results = Job.objects.filter(description__icontains=keyword, prefecture__icontains=area)
+    return render(request, 'list_view_senior.html', {'results': results, 'keyword': keyword, 'area': area})
