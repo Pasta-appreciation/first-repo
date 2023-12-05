@@ -1,7 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
 from django.conf import settings
-import os
+import os,uuid
 
 # Create your models here.
 #以下chatGPTに投げるためのPronpt
@@ -62,6 +62,7 @@ class Senior(models.Model):
     is_wanted = models.BooleanField(default=False)
 
 class Company(models.Model):
+    company_uid = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)
     company_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)#users紐付け
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

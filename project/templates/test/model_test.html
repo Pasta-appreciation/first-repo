@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>sign up</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css"/>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" href="{% static 'JavaScript/model_test.js' %}">
+</head>
+    <body class="h-screen w-screen grid grid-rows-2 grid-cols-2">
+        <div class="row-start-1 row-end-2 col-start-1 col-end-2 text-center">
+            <h1 class="text-center text-2xl">案件作成（募集側のみ）</h1>
+            <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_create' %}>作成画面へ</a></p>
+        </div>
+        <div class="text-2xl row-start-1 row-end-2 col-start-2 col-end-3 text-center">
+            <h1 class="text-center text-2xl">一覧（高齢：Jobリスト　募集：高齢者リスト）</h1>
+            <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_list' %}>一覧画面へ</a></p>
+        </div>
+        <div class="text-2xl row-start-2 row-end-3 col-start-1 col-end-2 text-center">一覧</div>
+        <div class="text-2xl row-start-2 row-end-3 col-start-2 col-end-3 text-center">削除</div>
+    </body>
+</html>

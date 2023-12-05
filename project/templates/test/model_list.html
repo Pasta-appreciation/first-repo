@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +14,20 @@
     {% load static %}
     <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
   </head>
-  <body class="original-gradient">
-    <h2>index.htmlだよ</h2>
+  <body class="w-screen h-screen original-gradient">
+    <h1 class="text-2xl">LIST</h1>
+    {% if user.is_senior %}
+        <ul>
+            {% for entry in object_list %}
+                <li>{{ entry.name}}</li>
+                <li>{{ entry.age }}</li>
+            {% endfor %}
+        {% else %}
+            {% for entry in object_list %}
+                <li>{{ entry.company.name }}</li>
+                <li>{{ entry.description }}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
   </body>
 </html>
