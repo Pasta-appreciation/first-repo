@@ -1,5 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
+from django.conf import settings
+import os
 
 # Create your models here.
 #以下chatGPTに投げるためのPronpt
@@ -46,17 +48,17 @@ homepage_url
 pic_path :企業のロゴ画像のパス
 description :企業の説明
 """
-from django.db import models
 
 class Senior(models.Model):
     senior_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)#users紐付け
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    name = models.CharField(max_length=255) #default指定しなきゃ
+    name = models.CharField(max_length=255, blank=True) #default指定しなきゃ
     age = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    face_path = models.ImageField(upload_to='/images/senior_faces/', blank=True, null=True)
+    face_path = models.ImageField(upload_to='images/company_pics/senior_pics/', blank=True, null=True)
+    #face_path = models.ImageField(upload_to=os.path.join(settings.BASE_DIR,'/images/company_pics/senior_pics'), blank=True, null=True)
     is_wanted = models.BooleanField(default=False)
 
 class Company(models.Model):
@@ -68,7 +70,8 @@ class Company(models.Model):
     industry = models.CharField(max_length=255,blank=True, null=True)
     homepage_url = models.URLField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    pic_path = models.ImageField(upload_to='/images/company_pics/', blank=True, null=True)
+    pic_path = models.ImageField(upload_to='images/company_pics/', blank=True, null=True)
+    #pic_path = models.ImageField(upload_to=os.path.join(settings.BASE_DIR,'/images/company_pics/'), blank=True, null=True)
 
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
