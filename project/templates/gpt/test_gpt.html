@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>DjangoでTailwindCSSを使用する方法</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
+  </head>
+  <body class="original-gradient h-screen w-screen grid grid-rows-2 grid-cols-2">
+    <div class="row-start-1 row-end-2 col-start-1 col-end-2 text-center">
+        <h1 class="text-center text-2xl">高齢者データ</h1>
+                    {% comment %} <li>{{ senior_data.created_at }}</li> {% endcomment %}
+                    {% comment %} <li>{{ senior_data.updated_at }}</li> {% endcomment %}
+                    <li>{{ senior_data.name }}</li>
+                    <li>{{ senior_data.age }}</li>
+                    <li>{{ senior_data.address }}</li>
+                    <li>{{ senior_data.description }}</li>
+                    {% comment %} <li>{{ senior_data.face_path }}</li> {% endcomment %}
+                    <li>{{ senior_data.is_wanted }}</li>
+        <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_create' %}>作成画面へ</a></p>
+    </div>
+    <div class="text-2xl row-start-1 row-end-2 col-start-2 col-end-3 text-center">
+        <h1 class="text-center text-2xl">求人一覧</h1>
+        {% for entry in job_data %}
+            <li>{{ entry.job_id }}</li>
+            <li>{{ entry.company.company_id }}</li>
+            <li>{{ entry.company.description }}</li>
+            <li>{{ entry.prefecture }}</li>
+            <li>{{ entry.occupation }}</li>
+            <li>{{ entry.salary }}</li>
+            <li>{{ entry.number_of_people }}</li>
+            <li class="mb-5">{{ entry.description }}</li>
+        {%endfor%}
+        <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_list' %}>一覧画面へ</a></p>
+    </div>
+    <div class="text-2xl row-start-2 row-end-3 col-start-1 col-end-2 text-center">
+        <h1 class="text-center text-2xl">実行</h1>
+        <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_run_gpt' %}>run gpt</a></p>
+        {{gpt_res }}
+    </div>
+    <div class="text-2xl row-start-2 row-end-3 col-start-2 col-end-3 text-center"></div>
+  </body>
+</html>

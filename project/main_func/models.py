@@ -58,7 +58,7 @@ class Senior(models.Model):
     age = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    face_path = models.ImageField(upload_to=Path('/images/senior_faces/'), blank=True, null=True)
+    face_path = models.ImageField(upload_to=Path('/media/images/senior_pics/'), blank=True, null=True)
     is_wanted = models.BooleanField(default=False)
 
 class Company(models.Model):

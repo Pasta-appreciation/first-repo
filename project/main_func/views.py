@@ -84,7 +84,7 @@ class SeniorListView(LoginRequiredMixin,ListView):
 
 #高齢者側の一覧表示。これは案件一覧表示
 class JobListView(LoginRequiredMixin,ListView):
-    template_name = 'model_list.html'
+    template_name = 'list_view_senior.html'
     print("test")
     model = Job
 
@@ -146,3 +146,50 @@ class UpdateSeniorView(LoginRequiredMixin, UpdateView):
     model = Senior
     fields = ['name', 'age', 'address','description']
     success_url = reverse_lazy('model_test')
+############################################################################################################
+
+#gpt############################################################################################################
+#高齢者への提案機能
+def display_model_data(request):
+    # モデルのデータを取得
+    job_data = Job.objects.all()
+    company_data = Company.objects.all()
+    print(request.user.pk)
+    senior_data = Senior.objects.get(senior_id_id=request.user.pk)
+
+    # テンプレートにデータを渡してレンダリング
+    return render(request, 'test_gpt.html', {'job_data': job_data, 'senior_data': senior_data})
+
+from .gpt import embedding, make_recommend
+def run_gpt(request):
+    job_data = Job.objects.all()
+    job_details = []
+    for job in job_data:
+        details = [
+            "job_id"+str(job.job_id),
+            "company_id"+str(job.company.company_id),
+            "company_description"+str(job.company.description),
+            "prefecture"+str(job.prefecture),
+            "salary"+str(job.salary),
+            "job_description"+str(job.description),
+            # 他のフィールドも同様に追加します
+        ]
+        job_details.append('\n'.join(details))
+    all_job_details = '\n'.join(job_details)
+    embedding(all_job_details)
+    
+    senior_data = Senior.objects.get(senior_id_id=request.user.pk)
+    senior_details = []
+    details = [
+            "applicant_name"+str(senior_data.name),
+            "applicant_address"+str(senior_data.address),
+            "applicant_descripton"+str(senior_data.description),
+    ]
+    senior_details.append('\n'.join(details))
+    all_senior_details = '\n'.join(senior_details)
+    print(all_senior_details)
+    res = make_recommend(all_senior_details)
+    return render(request, 'test_gpt.html', {'job_data': job_data, 'senior_data': senior_data, 'gpt_res': res})
+############################################################################################################
+
+
