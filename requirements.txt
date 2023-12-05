@@ -4,5 +4,5 @@ openai
 chroma
 pillow
 tiktoken
-coredjango-cors-headers
+#coredjango-cors-headers
 
