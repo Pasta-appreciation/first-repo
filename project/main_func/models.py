@@ -1,7 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
-from django.conf import settings
-import os
+from pathlib import Path
+
 
 # Create your models here.
 #以下chatGPTに投げるためのPronpt
@@ -57,8 +57,7 @@ class Senior(models.Model):
     age = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    face_path = models.ImageField(upload_to='images/company_pics/senior_pics/', blank=True, null=True)
-    #face_path = models.ImageField(upload_to=os.path.join(settings.BASE_DIR,'/images/company_pics/senior_pics'), blank=True, null=True)
+    face_path = models.ImageField(upload_to=Path('/images/senior_faces/'), blank=True, null=True)
     is_wanted = models.BooleanField(default=False)
 
 class Company(models.Model):
@@ -70,8 +69,8 @@ class Company(models.Model):
     industry = models.CharField(max_length=255,blank=True, null=True)
     homepage_url = models.URLField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    pic_path = models.ImageField(upload_to='images/company_pics/', blank=True, null=True)
-    #pic_path = models.ImageField(upload_to=os.path.join(settings.BASE_DIR,'/images/company_pics/'), blank=True, null=True)
+    pic_path = models.ImageField(upload_to=Path('/images/company_pics/'), blank=True, null=True)
+
 
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
