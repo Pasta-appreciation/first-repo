@@ -15,7 +15,7 @@
                 {% if user.is_authenticated %}
                     <h2 class="text-4xl text-center">{{user}}でログインしています</h2>
                     <div class="grid grid-rows-none grid-cols-3">
-                        <p style="color: blue" class="text-2xl col-start-1 col-end-2"><a href={% url 'accounts:logout' %}>ログアウトする　　</a></p>
+                        <p style="color: blue" class="text-2xl col-start-1 col-end-2"><a href={% url 'accounts:logout' %}>ログアウトする</a></p>
                         <p style="color: blue" class="text-2xl col-start-3 col-end-4"><a href={% url 'accounts:login_success' %}>一覧ページへ</a></p>
                     </div>
                 {% else %}
@@ -41,7 +41,6 @@
                     <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'accounts:signup' %}>新規登録</a></p>
                 </div>
                 {%endif%}
-
             </div>
         </div>
     </body>
