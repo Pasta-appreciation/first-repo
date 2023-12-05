@@ -26,7 +26,8 @@ urlpatterns = [
     path('', include('accounts.urls')),
     path('', include('gpt.urls')),
     path('', include('main_func.urls')),
-]
+    path('mypage_senior/', views.mypage_senior, name='mypage_senior'),
+]+ static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
