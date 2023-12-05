@@ -106,6 +106,7 @@ class DetailSeniorView(LoginRequiredMixin, DetailView):
 
 ############################################################################################################
 #edit
+##path.joinすれば良いのよ！！！！！！！！！！！！！！！
 def judge_update_view(request):
     if request.user.is_senior: 
         # return CreateCompanyEntryView.as_view()
