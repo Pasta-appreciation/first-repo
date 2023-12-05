@@ -19,14 +19,20 @@
     {% if user.is_senior %}
         <ul>
             {% for entry in object_list %}
+            {% comment %} company側の処理。高齢者一覧の表示 {% endcomment %}
                 <li>{{ entry.name}}</li>
                 <li>{{ entry.age }}</li>
+                <a href="{% url 'main_func:detail_senior' entry.pk %}" class="btn btn-active mb-5">詳細</a>
             {% endfor %}
         {% else %}
+        {% comment %} 高齢者側の処理、高齢者が検索した時の結果 {% endcomment %}
             {% for entry in object_list %}
                 <li>{{ entry.company.name }}</li>
                 <li>{{ entry.description }}</li>
+                <a href="{% url 'main_func:detail_job' entry.pk %}" class="btn btn-active mb-5">詳細</a>
+                <br />
             {% endfor %}
+            <a href="{% url 'main_func:company_list' %}" class="btn btn-active mb-5">会社一覧を見る</a>
         {% endif %}
     </ul>
   </body>

@@ -19,7 +19,18 @@
             <h1 class="text-center text-2xl">一覧（高齢：Jobリスト　募集：高齢者リスト）</h1>
             <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_list' %}>一覧画面へ</a></p>
         </div>
-        <div class="text-2xl row-start-2 row-end-3 col-start-1 col-end-2 text-center">一覧</div>
+        <div class="text-2xl row-start-2 row-end-3 col-start-1 col-end-2 text-center">
+            <h1 class="text-center text-2xl">編集</h1>
+            {{user}}
+            {% if user.is_senior %}
+                <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:update_company' user.pk %}>編集画面へ</a></p>
+            {% else %}
+                <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_search_senior' %}>キー取得</a></p>
+                {%if object %}
+                <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:update_senior' object.pk %}>更新画面へ</a></p>
+                {% endif %}
+            {% endif %}
+        </div>
         <div class="text-2xl row-start-2 row-end-3 col-start-2 col-end-3 text-center">削除</div>
     </body>
 </html>
