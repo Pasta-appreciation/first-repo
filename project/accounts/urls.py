@@ -15,6 +15,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
 
     path('senior/', SeniorHomeView.as_view(), name='senior'),
+    
     path('offering/', OfferingHomeView.as_view(), name='offering'),
 ]
 

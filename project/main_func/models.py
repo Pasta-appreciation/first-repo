@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
 from pathlib import Path
+import uuid
 
 
 # Create your models here.
@@ -70,6 +71,7 @@ class Company(models.Model):
     homepage_url = models.URLField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     pic_path = models.ImageField(upload_to=Path('/images/company_pics/'), blank=True, null=True)
+    company_uid = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)#企業ごとのUUIDを設定→URLに接続
 
 
 class Job(models.Model):

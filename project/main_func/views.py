@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,3 +18,6 @@ class CreateSeniorEntryView(LoginRequiredMixin,CreateView):
         entry.save()
         return super().form_valid(form)
     
+def company_page(request, company_uid):
+    company = get_object_or_404(Company, company_uid=company_uid)
+    return render(request, 'mypage_offering.html', {'company': company})

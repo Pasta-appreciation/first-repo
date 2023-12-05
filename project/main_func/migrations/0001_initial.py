@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -27,6 +28,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, null=True)),
                 ('pic_path', models.ImageField(blank=True, null=True, upload_to='images/company_pics/')),
                 ('company_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('company_uid', models.UUIDField(default=uuid.uuid4, editable=True, unique=True)),
             ],
         ),
         migrations.CreateModel(
