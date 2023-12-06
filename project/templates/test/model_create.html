@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>sign up</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css"/>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" href="{% static 'JavaScript/model_test.js' %}">
+</head>
+    <body>
+        <div class="">
+            <h1 class="text-center text-2xl">作成</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div>
+                        <label class="text-lg" for="Username">{{ field.label }}:</label><br>
+                        <input class="input input-bordered w-full max-w-xs mb-3" type="{{field.widget_type}}" name="{{field.name}}" maxlength="150" autofocus="" required="" id="{{ field.id_for_label}}">
+                    <div>
+                    {% for error in field.errors %}
+                        <p style="color: red">{{ error }}</p>
+                    {%endfor%}
+                {% endfor %}
+                <input class="btn btn-outline" type="submit" value="作成">    
+            </form>
+        </div>
+    </body>
+</html>

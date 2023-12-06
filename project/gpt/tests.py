@@ -40,6 +40,7 @@ class DefineVariableSenior(BaseModel):
         job_id :int = Field(..., discription="候補者が応募したいと思う案件のID")
         Why_should_applicant_apply_for_the_project :str = Field(..., discription="候補者がこの案件に応募すべきであるという理由について200字程度で記述")
 
+
 def make_show_business():
     
     discription = "\

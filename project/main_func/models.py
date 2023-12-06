@@ -1,7 +1,8 @@
 from django.db import models
 from accounts.models import CustomUser
 from pathlib import Path
-import uuid
+from django.conf import settings 
+import os,uuid
 
 
 # Create your models here.
@@ -58,25 +59,28 @@ class Senior(models.Model):
     age = models.IntegerField(blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    face_path = models.ImageField(upload_to=Path('/images/senior_faces/'), blank=True, null=True)
+    face_path = models.ImageField(upload_to=Path('/media/images/senior_pics/'), blank=True, null=True)
     is_wanted = models.BooleanField(default=False)
 
 class Company(models.Model):
+    company_uid = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)
     company_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)#users紐付け
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=255,blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
-    industry = models.CharField(max_length=255,blank=True, null=True)
+    industry = models.CharField(verbose_name="業種",choices=settings.INDUSTRIES,max_length=13,default="選択なし")
     homepage_url = models.URLField(max_length=200, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     pic_path = models.ImageField(upload_to=Path('/images/company_pics/'), blank=True, null=True)
     company_uid = models.UUIDField(default=uuid.uuid4, editable=True, unique=True)#企業ごとのUUIDを設定→URLに接続
 
-
 class Job(models.Model):
     job_id = models.AutoField(primary_key=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+    prefecture  = models.CharField(verbose_name="都道府県",choices=settings.PREFECTURES,max_length=4,default="選択なし")
+    occupation  = models.CharField(verbose_name="職種",choices=settings.OCCUPATIONS,max_length=17,default="選択なし")
+    salary = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     number_of_people = models.IntegerField(default=0)
