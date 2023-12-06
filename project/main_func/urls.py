@@ -21,6 +21,7 @@ urlpatterns = [
     # update
     path('test_update/', views.judge_update_view, name='test_update'),
     path('test_serach_senior/', views.search_senior, name='test_search_senior'),
+    path('serch_company/', views.search_company_for_update, name="search_company_update"),
     path('test_update_company/<int:pk>/', views.UpdateCompanyView.as_view(), name='update_company'),
     path('test_update_senior/<int:pk>/', views.UpdateSeniorView.as_view(), name='update_senior'),
 

@@ -131,7 +131,7 @@ def search_senior(request):
         return None
 
 class UpdateCompanyView(LoginRequiredMixin, UpdateView):
-    template_name = 'model_update.html'
+    template_name = 'company_update.html'
     model = Company
     fields = ['name', 'address', 'industry', 'homepage_url', 'description']
     success_url = reverse_lazy('model_test')
@@ -205,6 +205,14 @@ def search_company(request):
         print(f"request.user.pk:{request.user.pk}")
         company = Company.objects.get(company_id_id=request.user.pk)
         return redirect('main_func:company_my_page',company.pk)
+    except Company.DoesNotExist:
+        return None
+    
+def search_company_for_update(request):
+    try:
+        print(f"request.user.pk:{request.user.pk}")
+        company = Company.objects.get(company_id_id=request.user.pk)
+        return redirect('main_func:update_company',company.pk)
     except Company.DoesNotExist:
         return None
 
