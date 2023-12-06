@@ -162,11 +162,16 @@
                     <p class="text-gray-600 mb-2">性別 {{ entry.sex }}</p>
                     <p class="text-gray-600 mb-2">エリア: {{ entry.address }}</p>
                     <p class="text-gray-600 mb-2">業種: {{ entry.industry }}</p>
-
+                    <details class="collapse bg-base-200">
+                        <summary class="collapse-title text-xl font-medium">詳細情報を見る</summary>
+                        <div class="collapse-content">
+                            <p class="text-gray-600 mb-2">{{ entry.description }}</p>
+                        </div>
+                    </details>
                     <!-- 右側のボタン -->
                     <div class="flex justify-end mt-2">
                         <a href="{% url 'main_func:detail_senior' entry.pk %}"
-                            class="bg-blue-500 text-white px-4 py-2 rounded-full mr-2">詳細情報を見る</a>
+                            class="bg-blue-500 text-white px-4 py-2 rounded-full mr-2">個人ページへ</a>
                         <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">スカウト</a>
                     </div>
                 </div>
