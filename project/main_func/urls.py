@@ -25,6 +25,7 @@ urlpatterns = [
     path('serch_company/', views.search_company_for_update, name="search_company_update"),
     path('test_update_company/<int:pk>/', views.UpdateCompanyView.as_view(), name='update_company'),
     path('test_update_senior/<int:pk>/', views.UpdateSeniorView.as_view(), name='update_senior'),
+    path('serch_senior/', views.search_seior_for_update, name='search_senior_update'),
 
     #gpt
     path('test_gpt/', views.display_model_data, name='test_gpt'),

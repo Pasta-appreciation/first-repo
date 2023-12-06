@@ -18,12 +18,12 @@
               <img src="{% static 'imgs/logo.png' %}">
             </div>
             <div class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
-
-            <button
+                <!-- ログインかログアウトか -->
+                <button
                 class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                 type="button"><a href="{% url 'accounts:logout'%}">
                 ログアウト</a>
-            </button>
+                </button>
             </div>
           </div>
         </div>
@@ -51,7 +51,7 @@
                 
                 <!-- 編集ボタン -->
                 <div class="mt-4 ml-auto">
-                    <a href="test_update_senior/1" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <a href="{% url 'main_func:search_senior_update' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         編集する
                     </a>
             </div>     
