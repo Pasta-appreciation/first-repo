@@ -39,10 +39,10 @@ def judge_is_senior(request):
 
     if request.user.is_senior:
 
-        return render(request, 'list_view_senior.html')
+        return redirect('main_func:test_list_senior')
         #return TemplateResponse.__init__(request=request, template=get_template('list_view_senior.html'), context=None, content_type=None, status=None, charset=None, using=None)
     else:
-        return render(request, 'list_view_offering.html')
+        return redirect('main_func:test_list_company')
         #return TemplateResponse.__init__(request=request, template=get_template('list_view_offering.html'), context=None, content_type=None, status=None, charset=None, using=None)
 
 class SeniorHomeView(TemplateView):
@@ -50,3 +50,6 @@ class SeniorHomeView(TemplateView):
 
 class OfferingHomeView(TemplateView):
     template_name = 'list_view_offering.html'
+
+def redirect_to_senior_view(request):
+    return redirect('main_func:test_list_senior')
