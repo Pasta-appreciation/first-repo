@@ -29,14 +29,14 @@
                 <!-- 年齢検索 -->
                 <div>
                     <label for="age" class="label-text">年齢</label>
-                    <input type="text" id="age" name="age" placeholder="歳以下"
+                    <input type="text" id="age" name="age" placeholder="歳以下" value="{{ request.GET.age }}"
                         class="input input-bordered w-full max-w-xs" />
                 </div>
                 <!-- 性別 -->
                 <div>
                     <label for="sex" class="label-text">性別</label>
                     <select id="sex" name="sex" class="select select-bordered w-full max-w-xs">
-                        <option value="選択無し" {% if request.GET.gender == "選択無し" %}selected{% endif %}>選択無し</option>
+                        <option value="選択なし" {% if request.GET.gender == "選択なし" %}selected{% endif %}>選択なし</option>
                         <option value="男性" {% if request.GET.gender == "男性" %}selected{% endif %}>男性</option>
                         <option value="女性" {% if request.GET.gender == "女性" %}selected{% endif %}>女性</option>
                         <option value="その他" {% if request.GET.gender == "その他" %}selected{% endif %}>その他</option>
@@ -122,7 +122,7 @@
                 <div>
                     <label for="occupation" class="label-text">職種</label>
                     <select id="occupation" name="occupation" class="select select-bordered w-full max-w-xs">
-                        <option value="選択無し" {% if request.GET.job_category == "選択無し" %}selected{% endif %}>選択なし</option>
+                        <option value="選択なし" {% if request.GET.job_category == "選択なし" %}selected{% endif %}>選択なし</option>
                         <option value="営業" {% if request.GET.job_category == "営業" %}selected{% endif %}>営業</option>
                         <option value="販売・フード・アミューズメント" {% if request.GET.job_category == "販売・フード・アミューズメント" %}selected{% endif %}>販売・フード・アミューズメント</option>
                         <option value="医療・福祉" {% if request.GET.job_category == "医療・福祉" %}selected{% endif %}>医療・福祉</option>
@@ -165,6 +165,7 @@
                     <p class="text-gray-600 mb-2">性別 {{ entry.sex }}</p>
                     <p class="text-gray-600 mb-2">エリア: {{ entry.address }}</p>
                     <p class="text-gray-600 mb-2">業種: {{ entry.industry }}</p>
+                    <p class="text-gray-600 mb-2">職種: {{ entry.occupation }}</p>
                     <details class="collapse bg-base-200">
                         <summary class="collapse-title text-xl font-medium">詳細情報を見る</summary>
                         <div class="collapse-content">

@@ -98,13 +98,13 @@ class SeniorListView(LoginRequiredMixin,ListView):
             filter_conditions['description__icontains'] = keyword
         if age != '':
             filter_conditions['age__lte'] = age
-        if sex != '選択無し':
+        if sex != '選択なし':
             filter_conditions['sex__icontains'] = sex
-        if area != '選択無し':
+        if area != '選択なし':
             filter_conditions['address__icontains'] = area
-        if industry != '選択無し':
+        if industry != '選択なし':
             filter_conditions['industry__icontains'] = industry
-        if occupation != '選択無し':
+        if occupation != '選択なし':
             filter_conditions['occupation__icontains'] = occupation
 
 
