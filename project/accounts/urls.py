@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SignUpView, judge_is_senior, SignUpSuccessView,SeniorHomeView, OfferingHomeView
+from .views import SignUpView, judge_is_senior, SignUpSuccessView,SeniorHomeView, OfferingHomeView,redirect_to_senior_view
 from django.contrib.auth.views import LoginView, LogoutView
 
 app_name = 'accounts'
@@ -15,6 +15,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
 
     path('senior/', SeniorHomeView.as_view(), name='senior'),
+    
+
     path('offering/', OfferingHomeView.as_view(), name='offering'),
 ]
 

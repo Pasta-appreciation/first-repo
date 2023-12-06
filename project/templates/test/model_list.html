@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>DjangoでTailwindCSSを使用する方法</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
+  </head>
+  <body class="w-screen h-screen original-gradient">
+    <h1 class="text-2xl">LIST</h1>
+    {% if user.is_senior %}
+        <ul>
+            {% for entry in object_list %}
+            {% comment %} company側の処理。高齢者一覧の表示 {% endcomment %}
+                <li>{{ entry.name}}</li>
+                <li>{{ entry.age }}</li>
+                <a href="{% url 'main_func:detail_senior' entry.pk %}" class="btn btn-active mb-5">詳細</a>
+            {% endfor %}
+        {% else %}
+        {% comment %} 高齢者側の処理、高齢者が検索した時の結果 {% endcomment %}
+            {% for entry in object_list %}
+                <li>{{ entry.company.name }}</li>
+                <li>{{ entry.description }}</li>
+                <a href="{% url 'main_func:detail_job' entry.pk %}" class="btn btn-active mb-5">詳細</a>
+                <br />
+            {% endfor %}
+            <a href="{% url 'main_func:company_list' %}" class="btn btn-active mb-5">会社一覧を見る</a>
+        {% endif %}
+    </ul>
+  </body>
+</html>
