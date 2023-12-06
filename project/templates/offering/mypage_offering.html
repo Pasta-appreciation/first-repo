@@ -38,27 +38,30 @@
     <div class="container mx-auto mt-8 flex flex-wrap justify-center">
         <!-- 上部のカード - プロフィール画像と個人情報 -->
         <div class="w-full md:w-4/5 lg:w-2/3 bg-white rounded-lg overflow-hidden shadow-lg mb-8">
-            <div class="p-6 flex">
-                <div class="w-1/2">
-                    <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-gray-100 mx-auto">
-                        <img src="{{ object.pic_path}}" alt="プロフィール画像" class="object-cover">
+            <div class="">
+                <h2 class="text-5xl font-semibold text-gray-800 mb-4 mr-4 ml-4 mt-4 whitespace-nowrap overflow-ellipsis">{{ object.name }}</h2>
+                <div class="p06 flex">
+                    <div class="w-1/2">
+                        <div class="w-48 h-48 md:w-64 md:h-64 mb-4 rounded-full overflow-hidden border-4 border-gray-200 mx-auto">
+                            <img src="{{ object.pic_path}}" alt="" class="object-cover">
+                        </div>
+                    </div>
+                    <div class="w-1/2 pl-8">
+                        <div class="mt-4 text-left">
+                            <p class="text-3xl text-black overflow-ellipsis">本社所在地：</p>
+                            <p class="text-2xl text-gray-800 mb-4 ml-4">{{ object.address }}</p>
+                            <p class="text-3xl text-black whitespace-nowrap overflow-ellipsis">業種：</p>
+                            <p class="text-2xl text-gray-800 mb-4 ml-4">{{ object.industry }}</p>
+                            <p class="text-3xl text-black whitespace-nowrap overflow-ellipsis">企業HP：</p>
+                            <p class="text-2xl  whitespace-nowrap overflow-ellipsis ml-4 mb-4">
+                                <a href="{{ object.homepage_url }}" target="_blank" style="color: blue;" class="underline">
+                                    {{ object.homepage_url }}
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="w-1/2 pl-8">
-                    <div class="mt-4 text-left">
-                        <h2 class="text-5xl font-semibold text-gray-800 mb-4 whitespace-nowrap overflow-ellipsis">{{ object.name }}</h2>
-                        <p class="text-3xl whitespace-nowrap overflow-ellipsis">本社所在地</p>
-                        <p class="text-3xl text-gray-800 mb-2 ml-4">{{ object.address }}</p>
-                        <p class="text-3xl whitespace-nowrap overflow-ellipsis">業種</p>
-                        <p class="text-3xl text-gray-800 mb-2 ml-4">{{ object.industry }}</p>
-                        <p class="text-3xl whitespace-nowrap overflow-ellipsis">企業HP</p>
-                        <p class="text-1xl whitespace-nowrap overflow-ellipsis ml-4 mb-2">
-                            <a href={{object.homepage_url}} target="_blank" style="color: blue; text-decoration: none;">
-                                {{object.homepage_url}}
-                            </a>
-                          </p>
-                    </div>
-                </div>
+                
             </div>
         </div>
 

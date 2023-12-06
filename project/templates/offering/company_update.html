@@ -15,12 +15,12 @@
   </head>
   <body class="h-screen w-screen original-gradient">
     <div class="flex justify-center items-center min-h-screen bg-white">
-      <form method="post" class="w-full max-w-md p-6 rounded-lg shadow-lg">
+      <form method="post" class="w-full max-w-md p-6 rounded-lg shadow-lg bg-white">
           {% csrf_token %}
           {% for field in form %}
               <div class="mb-4">
-                <label class="color-black text-lg mb-2" for="{{ field.id_for_label }}">{{ field.label }}:</label>
-                <input class="border-2 border-black bg-white w-full p-2 rounded-lg" type="{{ field.widget_type }}" name="{{ field.name }}" maxlength="150" autofocus required id="{{ field.id_for_label }}" value="">
+                <label class="text-black text-lg mb-2" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <input class="border-2 border-black-100 bg-white w-full p-2 rounded-lg" type="{{ field.widget_type }}" name="{{ field.name }}" maxlength="150" autofocus required id="{{ field.id_for_label }}" value="">              
               </div>
               {% for error in field.errors %}
                   <p class="text-red-500">{{ error }}</p>
