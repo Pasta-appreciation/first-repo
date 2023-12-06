@@ -135,6 +135,11 @@ class DetailSeniorView(LoginRequiredMixin, DetailView):
     template_name = 'model_detail.html'
     model = Senior
 
+#会社の詳細表示
+class DetailCompanyView(LoginRequiredMixin, DetailView):
+    template_name = 'mypage_offering.html'
+    model = Company
+
 ############################################################################################################
 #edit
 ##path.joinすれば良いのよ！！！！！！！！！！！！！！！
@@ -155,7 +160,7 @@ def search_senior(request):
         return None
 
 class UpdateCompanyView(LoginRequiredMixin, UpdateView):
-    template_name = 'model_update.html'
+    template_name = 'company_update.html'
     model = Company
     fields = ['name', 'address', 'industry', 'homepage_url', 'description']
     success_url = reverse_lazy('model_test')
@@ -224,7 +229,19 @@ def run_gpt(request):
 ############################################################################################################
 
 
+def search_company(request):
+    try:
+        print(f"request.user.pk:{request.user.pk}")
+        company = Company.objects.get(company_id_id=request.user.pk)
+        return redirect('main_func:company_my_page',company.pk)
+    except Company.DoesNotExist:
+        return None
+    
+def search_company_for_update(request):
+    try:
+        print(f"request.user.pk:{request.user.pk}")
+        company = Company.objects.get(company_id_id=request.user.pk)
+        return redirect('main_func:update_company',company.pk)
+    except Company.DoesNotExist:
+        return None
 
-
-class CompanyMyView(TemplateView):
-    template_name = 'mypage_offering.html'
