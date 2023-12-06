@@ -1,6 +1,7 @@
 from typing import Any
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, TemplateView, ListView, DetailView, UpdateView, DeleteView
+
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Senior, Company, Job, Matching
@@ -42,6 +43,7 @@ class CreateCompanyEntryView(LoginRequiredMixin,CreateView):
         entry.save()
         return super().form_valid(form)
     
+
 def search_company(offer_user_id):
     try:
         company = Company.objects.get(company_id=offer_user_id)
@@ -192,4 +194,9 @@ def run_gpt(request):
     return render(request, 'test_gpt.html', {'job_data': job_data, 'senior_data': senior_data, 'gpt_res': res})
 ############################################################################################################
 
+
+
+def company_page(request, company_uid):
+    company = get_object_or_404(Company, company_uid=company_uid)
+    return render(request, 'mypage_offering.html', {'company': company})
 

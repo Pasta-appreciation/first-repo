@@ -14,7 +14,9 @@ urlpatterns = [
 
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
 
-    #path('senior/', redirect_to_senior_view, name='redirect_to_senior'),
+    path('senior/', SeniorHomeView.as_view(), name='senior'),
+    
+
     path('offering/', OfferingHomeView.as_view(), name='offering'),
 ]
 

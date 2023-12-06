@@ -25,4 +25,9 @@ urlpatterns = [
     #gpt
     path('test_gpt/', views.display_model_data, name='test_gpt'),
     path('test_run_gpt/', views.run_gpt, name='test_run_gpt'),
+    
+    #問題起きたら原因ここかも
+    path('create/', views.CreateSeniorEntryView.as_view(), name='test_create'),
+    path('offering/company/<uuid:company_uid>/', views.company_page, name='company_page'),  # 新しいパスを追加
+
 ]
