@@ -103,7 +103,7 @@ class DetailJobView(LoginRequiredMixin, DetailView):
 
 #高齢者の詳細表示
 class DetailSeniorView(LoginRequiredMixin, DetailView):
-    template_name = 'model_detail.html'
+    template_name = 'mypage_senior.html'
     model = Senior
 
 ############################################################################################################
