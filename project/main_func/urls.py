@@ -3,6 +3,7 @@ from . import views
 
 app_name = 'main_func'
 urlpatterns = [
+    path('offering/company', views.CompanyMyView.as_view(), name='company_page'),
     # create
     path('test_create/', views.judge_create_view, name='test_create'),
     #path('test_create_senior/', views.CreateSeniorEntryView.as_view(), name='test_create_senior'),

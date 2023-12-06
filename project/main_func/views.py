@@ -196,7 +196,6 @@ def run_gpt(request):
 
 
 
-def company_page(request, company_uid):
-    company = get_object_or_404(Company, company_uid=company_uid)
-    return render(request, 'mypage_offering.html', {'company': company})
 
+class CompanyMyView(TemplateView):
+    template_name = 'mypage_offering.html'
