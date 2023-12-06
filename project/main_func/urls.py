@@ -3,7 +3,7 @@ from . import views
 
 app_name = 'main_func'
 urlpatterns = [
-    path('offering/company', views.CompanyMyView.as_view(), name='company_page'),
+    path('offering/company', views.search_company, name='company_page'),
     # create
     path('test_create/', views.judge_create_view, name='test_create'),
     #path('test_create_senior/', views.CreateSeniorEntryView.as_view(), name='test_create_senior'),
@@ -17,9 +17,11 @@ urlpatterns = [
     # read detail
     path('test_list/company/<int:pk>/detail', views.DetailSeniorView.as_view(), name='detail_senior'),
     path('test_list/senior/<int:pk>/detail', views.DetailJobView.as_view(), name='detail_job'),
+    path('test_list/company/<int:pk>/mypage/', views.DetailCompanyView.as_view(), name='company_my_page'),
     # update
     path('test_update/', views.judge_update_view, name='test_update'),
     path('test_serach_senior/', views.search_senior, name='test_search_senior'),
+    path('serch_company/', views.search_company_for_update, name="search_company_update"),
     path('test_update_company/<int:pk>/', views.UpdateCompanyView.as_view(), name='update_company'),
     path('test_update_senior/<int:pk>/', views.UpdateSeniorView.as_view(), name='update_senior'),
 

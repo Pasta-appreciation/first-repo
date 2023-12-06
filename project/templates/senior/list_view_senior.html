@@ -20,7 +20,23 @@
           <div class="text-center sm:text-left w-1/6">
             <img src="{% static 'imgs/logo.png' %}">
           </div>
-        <a class="" href={% url 'accounts:logout' %}><<button class="btn btn-link">ログアウトする</button></a>
+          <div class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+            <button
+                class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                type="button"><a href="{% url 'main_func:test_gpt' %}">
+                自分に合った案件を探す</a>
+            </button>
+            <button
+                class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                type="button"><a href="{% url 'main_func:company_page' %}">
+                マイページ</a>
+            </button>
+            <button
+                class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                type="button"><a href="{% url 'accounts:logout'%}">
+                ログアウト</a>
+            </button>
+        </div>
         </div>
       </div>
     </header>

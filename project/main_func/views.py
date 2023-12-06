@@ -79,10 +79,41 @@ def judge_list_view(request):
         return redirect('main_func:test_list_senior')
 
 #offering 側の一覧表示。つまり高齢者の一覧表示
+
 class SeniorListView(LoginRequiredMixin,ListView):
     template_name = 'list_view_offering.html'
-    print("test")
     model = Senior
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # フォームからのデータを取得
+        keyword = self.request.GET.get('keyword', '')
+        age = self.request.GET.get('age', '')
+        sex = self.request.GET.get('sex', '')
+        area = self.request.GET.get('area', '')
+        industry = self.request.GET.get('industry', '')
+        occupation = self.request.GET.get('occupation', '')
+        # フィルタリング条件を設定
+        filter_conditions = {}
+        if keyword != '':
+            filter_conditions['description__icontains'] = keyword
+        if age != '':
+            filter_conditions['age__lte'] = age
+        if sex != '選択なし':
+            filter_conditions['sex__icontains'] = sex
+        if area != '選択なし':
+            filter_conditions['address__icontains'] = area
+        if industry != '選択なし':
+            filter_conditions['industry__icontains'] = industry
+        if occupation != '選択なし':
+            filter_conditions['occupation__icontains'] = occupation
+
+
+        
+        # フィルタリングを適用
+        if filter_conditions:
+            queryset = queryset.filter(**filter_conditions)
+        return queryset
+        
 
 #高齢者側の一覧表示。これは案件一覧表示
 class JobListView(LoginRequiredMixin,ListView):
@@ -135,6 +166,11 @@ class DetailSeniorView(LoginRequiredMixin, DetailView):
     template_name = 'model_detail.html'
     model = Senior
 
+#会社の詳細表示
+class DetailCompanyView(LoginRequiredMixin, DetailView):
+    template_name = 'mypage_offering.html'
+    model = Company
+
 ############################################################################################################
 #edit
 ##path.joinすれば良いのよ！！！！！！！！！！！！！！！
@@ -155,7 +191,7 @@ def search_senior(request):
         return None
 
 class UpdateCompanyView(LoginRequiredMixin, UpdateView):
-    template_name = 'model_update.html'
+    template_name = 'company_update.html'
     model = Company
     fields = ['name', 'address', 'industry', 'homepage_url', 'description']
     success_url = reverse_lazy('model_test')
@@ -177,6 +213,8 @@ class UpdateSeniorView(LoginRequiredMixin, UpdateView):
     model = Senior
     fields = ['name', 'age', 'address','description']
     success_url = reverse_lazy('model_test')
+
+
 ############################################################################################################
 
 #gpt############################################################################################################
@@ -224,7 +262,19 @@ def run_gpt(request):
 ############################################################################################################
 
 
+def search_company(request):
+    try:
+        print(f"request.user.pk:{request.user.pk}")
+        company = Company.objects.get(company_id_id=request.user.pk)
+        return redirect('main_func:company_my_page',company.pk)
+    except Company.DoesNotExist:
+        return None
+    
+def search_company_for_update(request):
+    try:
+        print(f"request.user.pk:{request.user.pk}")
+        company = Company.objects.get(company_id_id=request.user.pk)
+        return redirect('main_func:update_company',company.pk)
+    except Company.DoesNotExist:
+        return None
 
-
-class CompanyMyView(TemplateView):
-    template_name = 'mypage_offering.html'

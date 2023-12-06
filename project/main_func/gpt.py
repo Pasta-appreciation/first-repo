@@ -15,7 +15,7 @@ from langchain.chains.openai_functions import create_structured_output_chain
 from django.conf import settings
 from langchain.pydantic_v1 import BaseModel, Field
 
-collection_name = "langchain_test4"
+collection_name = "langchain_test5"
 
 class DefineVariableSenior(BaseModel):
         company_id :int = Field(..., discription="会社のID")

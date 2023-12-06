@@ -1,0 +1,21 @@
+<div class="mx-auto max-w-screen-xl px-4 py-2 sm:px-6 sm:py-4 lg:px-8 border">
+
+    <div class="sm:flex sm:items-center sm:justify-between">
+        {% load static %}
+        <div class="text-center sm:text-left w-1/6">
+            <img src="{% static 'imgs/logo.png' %}">
+        </div>
+        <div class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
+            <button
+                class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                type="button"><a href="{% url 'main_func:company_page' %}">
+                    マイページ</a>
+            </button>
+            <button
+                class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                type="button"><a href="{% url 'accounts:logout'%}">
+                    ログアウト</a>
+            </button>
+        </div>
+    </div>
+</div>
