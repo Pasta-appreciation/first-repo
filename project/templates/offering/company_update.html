@@ -14,18 +14,21 @@
     <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
   </head>
   <body class="h-screen w-screen original-gradient">
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-            <div>
-                <label class="text-lg" for="Username">{{ field.label }}:</label><br>
-                <input class="input input-bordered w-full max-w-xs mb-3" type="{{field.widget_type}}" name="{{field.name}}" maxlength="150" autofocus="" required="" id="{{ field.id_for_label}}" value="">
-            <div>
-            {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
-            {%endfor%}
-        {% endfor %}
-        <input class="btn btn-outline" type="submit" value="更新">    
-    </form>
+    <div class="flex justify-center items-center min-h-screen bg-white">
+      <form method="post" class="w-full max-w-md p-6 rounded-lg shadow-lg bg-white">
+          {% csrf_token %}
+          {% for field in form %}
+              <div class="mb-4">
+                <label class="text-black text-lg mb-2" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <input class="border-2 border-black-100 bg-white w-full p-2 rounded-lg" type="{{ field.widget_type }}" name="{{ field.name }}" maxlength="150" autofocus required id="{{ field.id_for_label }}" value="">              
+              </div>
+              {% for error in field.errors %}
+                  <p class="text-red-500">{{ error }}</p>
+              {% endfor %}
+          {% endfor %}
+          <input class="btn btn-primary w-full mt-4 hover:text-white" type="submit" value="更新">
+      </form>
+    </div>
+  
   </body>
 </html>
