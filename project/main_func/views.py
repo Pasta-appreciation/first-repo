@@ -195,7 +195,5 @@ def run_gpt(request):
 ############################################################################################################
 
 
-
-
 class CompanyMyView(TemplateView):
     template_name = 'mypage_offering.html'
