@@ -23,7 +23,7 @@
                 <!-- キーワード検索 -->
                 <div>
                     <label for="keyword" class="label-text">キーワード</label>
-                    <input type="text" id="keyword" name="keyword" placeholder="ここに入力"
+                    <input type="text" id="keyword" name="keyword" placeholder="ここに入力" value="{{ request.GET.keyword }}"
                         class="input input-bordered w-full max-w-xs" />
                 </div>
                 <!-- 年齢検索 -->
@@ -36,106 +36,109 @@
                 <div>
                     <label for="sex" class="label-text">性別</label>
                     <select id="sex" name="sex" class="select select-bordered w-full max-w-xs">
-                        <option value="選択無し" selected>選択無し</option>
-                        <option value="男性">男性</option>
-                        <option value="女性">女性</option>
-                        <option value="その他">その他</option>
+                        <option value="選択無し" {% if request.GET.gender == "選択無し" %}selected{% endif %}>選択無し</option>
+                        <option value="男性" {% if request.GET.gender == "男性" %}selected{% endif %}>男性</option>
+                        <option value="女性" {% if request.GET.gender == "女性" %}selected{% endif %}>女性</option>
+                        <option value="その他" {% if request.GET.gender == "その他" %}selected{% endif %}>その他</option>
+
                     </select>
                 </div>
                 <!-- エリア検索 -->
                 <div>
                     <label for="area" class="label-text">エリア</label>
                     <select id="area" name="area" class="select select-bordered w-full max-w-xs">
-                        <option value="" selected>選択なし</option>
-                        <option value="北海道">北海道</option>
-                        <option value="青森県">青森県</option>
-                        <option value="岩手県">岩手県</option>
-                        <option value="宮城県">宮城県</option>
-                        <option value="秋田県">秋田県</option>
-                        <option value="山形県">山形県</option>
-                        <option value="福島県">福島県</option>
-                        <option value="茨城県">茨城県</option>
-                        <option value="栃木県">栃木県</option>
-                        <option value="群馬県">群馬県</option>
-                        <option value="埼玉県">埼玉県</option>
-                        <option value="千葉県">千葉県</option>
-                        <option value="東京都">東京都</option>
-                        <option value="神奈川県">神奈川県</option>
-                        <option value="新潟県">新潟県</option>
-                        <option value="富山県">富山県</option>
-                        <option value="石川県">石川県</option>
-                        <option value="福井県">福井県</option>
-                        <option value="山梨県">山梨県</option>
-                        <option value="長野県">長野県</option>
-                        <option value="岐阜県">岐阜県</option>
-                        <option value="静岡県">静岡県</option>
-                        <option value="愛知県">愛知県</option>
-                        <option value="三重県">三重県</option>
-                        <option value="滋賀県">滋賀県</option>
-                        <option value="京都府">京都府</option>
-                        <option value="大阪府">大阪府</option>
-                        <option value="兵庫県">兵庫県</option>
-                        <option value="奈良県">奈良県</option>
-                        <option value="和歌山県">和歌山県</option>
-                        <option value="鳥取県">鳥取県</option>
-                        <option value="島根県">島根県</option>
-                        <option value="岡山県">岡山県</option>
-                        <option value="広島県">広島県</option>
-                        <option value="山口県">山口県</option>
-                        <option value="徳島県">徳島県</option>
-                        <option value="香川県">香川県</option>
-                        <option value="愛媛県">愛媛県</option>
-                        <option value="高知県">高知県</option>
-                        <option value="福岡県">福岡県</option>
-                        <option value="佐賀県">佐賀県</option>
-                        <option value="長崎県">長崎県</option>
-                        <option value="熊本県">熊本県</option>
-                        <option value="大分県">大分県</option>
-                        <option value="宮崎県">宮崎県</option>
-                        <option value="鹿児島県">鹿児島県</option>
-                        <option value="沖縄県">沖縄県</option>
+                        <option value="選択なし" {% if request.GET.area == "選択なし" %}selected{% endif %}>選択なし</option>
+                        <option value="北海道" {% if request.GET.area == "北海道" %}selected{% endif %}>北海道</option>
+                        <option value="青森県" {% if request.GET.area == "青森県" %}selected{% endif %}>青森県</option>
+                        <option value="岩手県" {% if request.GET.area == "岩手県" %}selected{% endif %}>岩手県</option>
+                        <option value="宮城県" {% if request.GET.area == "宮城県" %}selected{% endif %}>宮城県</option>
+                        <option value="秋田県" {% if request.GET.area == "秋田県" %}selected{% endif %}>秋田県</option>
+                        <option value="山形県" {% if request.GET.area == "山形県" %}selected{% endif %}>山形県</option>
+                        <option value="福島県" {% if request.GET.area == "福島県" %}selected{% endif %}>福島県</option>
+                        <option value="茨城県" {% if request.GET.area == "茨城県" %}selected{% endif %}>茨城県</option>
+                        <option value="栃木県" {% if request.GET.area == "栃木県" %}selected{% endif %}>栃木県</option>
+                        <option value="群馬県" {% if request.GET.area == "群馬県" %}selected{% endif %}>群馬県</option>
+                        <option value="埼玉県" {% if request.GET.area == "埼玉県" %}selected{% endif %}>埼玉県</option>
+                        <option value="千葉県" {% if request.GET.area == "千葉県" %}selected{% endif %}>千葉県</option>
+                        <option value="東京都" {% if request.GET.area == "東京都" %}selected{% endif %}>東京都</option>
+                        <option value="神奈川県" {% if request.GET.area == "神奈川県" %}selected{% endif %}>神奈川県</option>
+                        <option value="新潟県" {% if request.GET.area == "新潟県" %}selected{% endif %}>新潟県</option>
+                        <option value="富山県" {% if request.GET.area == "富山県" %}selected{% endif %}>富山県</option>
+                        <option value="石川県" {% if request.GET.area == "石川県" %}selected{% endif %}>石川県</option>
+                        <option value="福井県" {% if request.GET.area == "福井県" %}selected{% endif %}>福井県</option>
+                        <option value="山梨県" {% if request.GET.area == "山梨県" %}selected{% endif %}>山梨県</option>
+                        <option value="長野県" {% if request.GET.area == "長野県" %}selected{% endif %}>長野県</option>
+                        <option value="岐阜県" {% if request.GET.area == "岐阜県" %}selected{% endif %}>岐阜県</option>
+                        <option value="静岡県" {% if request.GET.area == "静岡県" %}selected{% endif %}>静岡県</option>
+                        <option value="愛知県" {% if request.GET.area == "愛知県" %}selected{% endif %}>愛知県</option>
+                        <option value="三重県" {% if request.GET.area == "三重県" %}selected{% endif %}>三重県</option>
+                        <option value="滋賀県" {% if request.GET.area == "滋賀県" %}selected{% endif %}>滋賀県</option>
+                        <option value="京都府" {% if request.GET.area == "京都府" %}selected{% endif %}>京都府</option>
+                        <option value="大阪府" {% if request.GET.area == "大阪府" %}selected{% endif %}>大阪府</option>
+                        <option value="兵庫県" {% if request.GET.area == "兵庫県" %}selected{% endif %}>兵庫県</option>
+                        <option value="奈良県" {% if request.GET.area == "奈良県" %}selected{% endif %}>奈良県</option>
+                        <option value="和歌山県" {% if request.GET.area == "和歌山県" %}selected{% endif %}>和歌山県</option>
+                        <option value="鳥取県" {% if request.GET.area == "鳥取県" %}selected{% endif %}>鳥取県</option>
+                        <option value="島根県" {% if request.GET.area == "島根県" %}selected{% endif %}>島根県</option>
+                        <option value="岡山県" {% if request.GET.area == "岡山県" %}selected{% endif %}>岡山県</option>
+                        <option value="広島県" {% if request.GET.area == "広島県" %}selected{% endif %}>広島県</option>
+                        <option value="山口県" {% if request.GET.area == "山口県" %}selected{% endif %}>山口県</option>
+                        <option value="徳島県" {% if request.GET.area == "徳島県" %}selected{% endif %}>徳島県</option>
+                        <option value="香川県" {% if request.GET.area == "香川県" %}selected{% endif %}>香川県</option>
+                        <option value="愛媛県" {% if request.GET.area == "愛媛県" %}selected{% endif %}>愛媛県</option>
+                        <option value="高知県" {% if request.GET.area == "高知県" %}selected{% endif %}>高知県</option>
+                        <option value="福岡県" {% if request.GET.area == "福岡県" %}selected{% endif %}>福岡県</option>
+                        <option value="佐賀県" {% if request.GET.area == "佐賀県" %}selected{% endif %}>佐賀県</option>
+                        <option value="長崎県" {% if request.GET.area == "長崎県" %}selected{% endif %}>長崎県</option>
+                        <option value="熊本県" {% if request.GET.area == "熊本県" %}selected{% endif %}>熊本県</option>
+                        <option value="大分県" {% if request.GET.area == "大分県" %}selected{% endif %}>大分県</option>
+                        <option value="宮崎県" {% if request.GET.area == "宮崎県" %}selected{% endif %}>宮崎県</option>
+                        <option value="鹿児島県" {% if request.GET.area == "鹿児島県" %}selected{% endif %}>鹿児島県</option>
+                        <option value="沖縄県" {% if request.GET.area == "沖縄県" %}selected{% endif %}>沖縄県</option>
+
                     </select>
                 </div>
                 <!-- 業種検索 -->
                 <div>
                     <label for="industry" class="label-text">業種</label>
                     <select id="industry" name="industry" class="select select-bordered w-full max-w-xs">
-                        <option value="" selected>選択なし</option>
-                        <option value="IT・通信・インターネット">IT・通信・インターネット</option>
-                        <option value="メーカー">メーカー</option>
-                        <option value="商社">商社</option>
-                        <option value="サービス・レジャー">サービス・レジャー</option>
-                        <option value="流通・小売・フード">流通・小売・フード</option>
-                        <option value="ソフトウエア">ソフトウエア</option>
-                        <option value="マスコミ・広告・デザイン">マスコミ・広告・デザイン</option>
-                        <option value="コンサルティング">コンサルティング</option>
-                        <option value="不動産・建設・設備">不動産・建設・設備</option>
-                        <option value="運輸・交通・物流・倉庫">運輸・交通・物流・倉庫</option>
-                        <option value="環境・エネルギー">環境・エネルギー</option>
-                        <option value="公的機関">公的機関</option>
+                        <option value="" {% if request.GET.industry == "" %}selected{% endif %}>選択なし</option>
+                        <option value="IT・通信・インターネット" {% if request.GET.industry == "IT・通信・インターネット" %}selected{% endif %}>IT・通信・インターネット</option>
+                        <option value="メーカー" {% if request.GET.industry == "メーカー" %}selected{% endif %}>メーカー</option>
+                        <option value="商社" {% if request.GET.industry == "商社" %}selected{% endif %}>商社</option>
+                        <option value="サービス・レジャー" {% if request.GET.industry == "サービス・レジャー" %}selected{% endif %}>サービス・レジャー</option>
+                        <option value="流通・小売・フード" {% if request.GET.industry == "流通・小売・フード" %}selected{% endif %}>流通・小売・フード</option>
+                        <option value="ソフトウエア" {% if request.GET.industry == "ソフトウエア" %}selected{% endif %}>ソフトウエア</option>
+                        <option value="マスコミ・広告・デザイン" {% if request.GET.industry == "マスコミ・広告・デザイン" %}selected{% endif %}>マスコミ・広告・デザイン</option>
+                        <option value="コンサルティング" {% if request.GET.industry == "コンサルティング" %}selected{% endif %}>コンサルティング</option>
+                        <option value="不動産・建設・設備" {% if request.GET.industry == "不動産・建設・設備" %}selected{% endif %}>不動産・建設・設備</option>
+                        <option value="運輸・交通・物流・倉庫" {% if request.GET.industry == "運輸・交通・物流・倉庫" %}selected{% endif %}>運輸・交通・物流・倉庫</option>
+                        <option value="環境・エネルギー" {% if request.GET.industry == "環境・エネルギー" %}selected{% endif %}>環境・エネルギー</option>
+                        <option value="公的機関" {% if request.GET.industry == "公的機関" %}selected{% endif %}>公的機関</option>
+                        
                     </select>
                 </div>
                 <!-- 職種検索 -->
                 <div>
                     <label for="occupation" class="label-text">職種</label>
                     <select id="occupation" name="occupation" class="select select-bordered w-full max-w-xs">
-                        <option value="" selected>選択なし</option>
-                        <option value="営業">営業</option>
-                        <option value="販売・フード・アミューズメント">販売・フード・アミューズメント</option>
-                        <option value="医療・福祉">医療・福祉</option>
-                        <option value="企画・経営">企画・経営</option>
-                        <option value="建築・土木">建築・土木</option>
-                        <option value="ITエンジニア">ITエンジニア</option>
-                        <option value="電気・電子・機械・半導体">電気・電子・機械・半導体</option>
-                        <option value="医薬・食品・化学・素材">医薬・食品・化学・素材</option>
-                        <option value="コンサルタント・金融・不動産専門職">コンサルタント・金融・不動産専門職</option>
-                        <option value="クリエイティブ">クリエイティブ</option>
-                        <option value="技能工・設備・配送・農林水産">技能工・設備・配送・農林水産</option>
-                        <option value="公共サービス">公共サービス</option>
-                        <option value="管理・事務">管理・事務</option>
-                        <option value="美容・ブライダル・ホテル・交通">美容・ブライダル・ホテル・交通</option>
-                        <option value="保育・教育・通訳">保育・教育・通訳</option>
-                        <option value="WEB・インターネット・ゲーム">WEB・インターネット・ゲーム</option>
+                        <option value="選択無し" {% if request.GET.job_category == "選択無し" %}selected{% endif %}>選択なし</option>
+                        <option value="営業" {% if request.GET.job_category == "営業" %}selected{% endif %}>営業</option>
+                        <option value="販売・フード・アミューズメント" {% if request.GET.job_category == "販売・フード・アミューズメント" %}selected{% endif %}>販売・フード・アミューズメント</option>
+                        <option value="医療・福祉" {% if request.GET.job_category == "医療・福祉" %}selected{% endif %}>医療・福祉</option>
+                        <option value="企画・経営" {% if request.GET.job_category == "企画・経営" %}selected{% endif %}>企画・経営</option>
+                        <option value="建築・土木" {% if request.GET.job_category == "建築・土木" %}selected{% endif %}>建築・土木</option>
+                        <option value="ITエンジニア" {% if request.GET.job_category == "ITエンジニア" %}selected{% endif %}>ITエンジニア</option>
+                        <option value="電気・電子・機械・半導体" {% if request.GET.job_category == "電気・電子・機械・半導体" %}selected{% endif %}>電気・電子・機械・半導体</option>
+                        <option value="医薬・食品・化学・素材" {% if request.GET.job_category == "医薬・食品・化学・素材" %}selected{% endif %}>医薬・食品・化学・素材</option>
+                        <option value="コンサルタント・金融・不動産専門職" {% if request.GET.job_category == "コンサルタント・金融・不動産専門職" %}selected{% endif %}>コンサルタント・金融・不動産専門職</option>
+                        <option value="クリエイティブ" {% if request.GET.job_category == "クリエイティブ" %}selected{% endif %}>クリエイティブ</option>
+                        <option value="技能工・設備・配送・農林水産" {% if request.GET.job_category == "技能工・設備・配送・農林水産" %}selected{% endif %}>技能工・設備・配送・農林水産</option>
+                        <option value="公共サービス" {% if request.GET.job_category == "公共サービス" %}selected{% endif %}>公共サービス</option>
+                        <option value="管理・事務" {% if request.GET.job_category == "管理・事務" %}selected{% endif %}>管理・事務</option>
+                        <option value="美容・ブライダル・ホテル・交通" {% if request.GET.job_category == "美容・ブライダル・ホテル・交通" %}selected{% endif %}>美容・ブライダル・ホテル・交通</option>
+                        <option value="保育・教育・通訳" {% if request.GET.job_category == "保育・教育・通訳" %}selected{% endif %}>保育・教育・通訳</option>
+                        <option value="WEB・インターネット・ゲーム" {% if request.GET.job_category == "WEB・インターネット・ゲーム" %}selected{% endif %}>WEB・インターネット・ゲーム</option>
                     </select>
                 </div>
             </div>
