@@ -19,5 +19,34 @@ class CreateSeniorEntryView(LoginRequiredMixin,CreateView):
 
 class JobListView(LoginRequiredMixin,ListView):
     template_name = 'list_view_senior.html'
-    print("test")
     model = Job
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        # フォームからのデータを取得
+        prefecture = self.request.GET.get('prefecture', '')
+        industry = self.request.GET.get('industry', '')
+        occupation = self.request.GET.get('occupation', '')
+        keyword = self.request.GET.get('keyword', '')
+
+        # フィルタリング条件を設定
+        filter_conditions = {}
+
+        if prefecture != '選択なし':
+            filter_conditions['prefecture__icontains'] = prefecture
+
+        if industry != '選択なし':
+            filter_conditions['industry__icontains'] = industry
+
+        if occupation != '選択なし':
+            filter_conditions['occupation__icontains'] = occupation
+
+        if keyword:
+            filter_conditions['description__icontains'] = keyword
+
+        # フィルタリングを適用
+        if filter_conditions:
+            queryset = queryset.filter(**filter_conditions)
+
+        return queryset
