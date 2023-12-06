@@ -148,6 +148,28 @@ class UpdateSeniorView(LoginRequiredMixin, UpdateView):
     model = Senior
     fields = ['name', 'age', 'address','description']
     success_url = reverse_lazy('model_test')
+
+
+class SeniorListView(LoginRequiredMixin,ListView):
+    template_name = 'list_view_offering.html'
+    model = Senior
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # フォームからのデータを取得
+        keyword = self.request.GET.get('keyword', '')
+        age = self.request.GET.get('age', '')
+        # フィルタリング条件を設定
+        filter_conditions = {}
+        if age != '':
+            filter_conditions['age__lte'] = age
+        if keyword != '':
+            filter_conditions['description__icontains'] = keyword
+        
+        # フィルタリングを適用
+        if filter_conditions:
+            queryset = queryset.filter(**filter_conditions)
+        return queryset
+        
 ############################################################################################################
 
 #gpt############################################################################################################
