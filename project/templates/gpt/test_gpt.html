@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
   <head>
@@ -48,5 +49,40 @@
         {% endif %}
     </div>
     <div class="text-2xl row-start-2 row-end-3 col-start-2 col-end-3 text-center"></div>
+  </body>
+</html>
+-->
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>DjangoでTailwindCSSを使用する方法</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
+  </head>
+  <body class="flex items-center justify-center w-screen h-screen original-gradient">
+    <div class="text-2xl text-center bg-white w-3/4 h-2/4 rounded-3xl">
+      {% comment %} <div class="grid grid-container grid-cols-1"> {% endcomment %}
+        <div class="grid-container">
+          <h1 class="grid-item-top font-bold">案件の紹介を受ける</h1>
+          {% if gpt_res %}
+            <p class="overflow-auto grid-item-middle">{{ gpt_res.Why_should_applicant_apply_for_the_project }}</p>
+          {% else %}
+            <a class="hover:underline-offset-1 hover:underline grid-item-bottom mr-10 ml-10" href={% url 'main_func:test_run_gpt' %}><button class="btn btn-neutral ">ここを押して下さい</button></a>
+          {% endif %}
+        </div>
+        {% comment %} <h1 class="text-center text-2xl row-start-1 row-end-2">案件の紹介を受ける</h1> {% endcomment %}
+        {% comment %} <p style="color:blue" class="grid-item-bottom"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_run_gpt' %}>ここを押して下さい</a></p> {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+    </div>
   </body>
 </html>
