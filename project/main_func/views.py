@@ -166,29 +166,29 @@ def run_gpt(request):
     job_details = []
     for job in job_data:
         details = [
-            "job_id"+str(job.job_id),
-            "company_id"+str(job.company.company_id),
-            "company_description"+str(job.company.description),
-            "prefecture"+str(job.prefecture),
-            "salary"+str(job.salary),
-            "job_description"+str(job.description),
+            "##job_id:"+str(job.job_id),
+            "##company_id:"+str(job.company.company_id_id),
+            "company_description:"+str(job.company.description),
+            "prefecture:"+str(job.prefecture),
+            "salary:"+str(job.salary),
+            "job_description:"+str(job.description),
             # 他のフィールドも同様に追加します
         ]
-        job_details.append('\n'.join(details))
-    all_job_details = '\n'.join(job_details)
-    embedding(all_job_details)
+        job_details.append(' '.join(details))
+    all_job_details = '\\'.join(job_details)
+    vectorestore = embedding(all_job_details)
     
     senior_data = Senior.objects.get(senior_id_id=request.user.pk)
     senior_details = []
     details = [
-            "applicant_name"+str(senior_data.name),
-            "applicant_address"+str(senior_data.address),
-            "applicant_descripton"+str(senior_data.description),
+            "applicant_name:"+str(senior_data.name),
+            "applicant_address:"+str(senior_data.address),
+            "applicant_descripton:"+str(senior_data.description),
     ]
-    senior_details.append('\n'.join(details))
-    all_senior_details = '\n'.join(senior_details)
+    senior_details.append(''.join(details))
+    all_senior_details = '\\'.join(senior_details)
     print(all_senior_details)
-    res = make_recommend(all_senior_details)
+    res = make_recommend(all_senior_details, vectorestore)
     return render(request, 'test_gpt.html', {'job_data': job_data, 'senior_data': senior_data, 'gpt_res': res})
 ############################################################################################################
 

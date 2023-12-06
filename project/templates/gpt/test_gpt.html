@@ -43,7 +43,9 @@
     <div class="text-2xl row-start-2 row-end-3 col-start-1 col-end-2 text-center">
         <h1 class="text-center text-2xl">実行</h1>
         <p style="color:blue"><a class="hover:underline-offset-1 hover:underline" href={% url 'main_func:test_run_gpt' %}>run gpt</a></p>
-        {{gpt_res }}
+        {% if gpt_res %}
+        {{ gpt_res }}
+        {% endif %}
     </div>
     <div class="text-2xl row-start-2 row-end-3 col-start-2 col-end-3 text-center"></div>
   </body>
