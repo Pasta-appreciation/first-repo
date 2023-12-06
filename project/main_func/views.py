@@ -163,7 +163,7 @@ class DetailJobView(LoginRequiredMixin, DetailView):
 
 #高齢者の詳細表示
 class DetailSeniorView(LoginRequiredMixin, DetailView):
-    template_name = 'model_detail.html'
+    template_name = 'mypage_senior.html'
     model = Senior
 
 #会社の詳細表示
@@ -187,6 +187,14 @@ def search_senior(request):
         print(request.user.pk)
         senior = Senior.objects.get(senior_id_id=request.user.pk)
         return render(request, 'model_test.html', {'object':senior})
+    except Company.DoesNotExist:
+        return None
+
+def search_senior_for_2(request):
+    try:
+        print(request.user.pk)
+        senior = Senior.objects.get(senior_id_id=request.user.pk)
+        return render(request, 'mypage_senior.html', {'object':senior})
     except Company.DoesNotExist:
         return None
 

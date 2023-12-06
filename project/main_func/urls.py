@@ -18,6 +18,7 @@ urlpatterns = [
     path('test_list/company/<int:pk>/detail', views.DetailSeniorView.as_view(), name='detail_senior'),
     path('test_list/senior/<int:pk>/detail', views.DetailJobView.as_view(), name='detail_job'),
     path('test_list/company/<int:pk>/mypage/', views.DetailCompanyView.as_view(), name='company_my_page'),
+    path('last_page/', views.search_senior_for_2, name='last_page'),
     # update
     path('test_update/', views.judge_update_view, name='test_update'),
     path('test_serach_senior/', views.search_senior, name='test_search_senior'),
