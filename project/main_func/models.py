@@ -57,7 +57,7 @@ class Senior(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=255, blank=True) #default指定しなきゃ
     age = models.IntegerField(blank=True, null=True)
-    sex = models.CharField(verbose_name="性別",choices=settings.INDUSTRIES,max_length=13,default="選択なし")
+    sex = models.CharField(verbose_name="性別",choices=settings.SEX,max_length=13,default="選択なし")
     industry = models.CharField(verbose_name="業種",choices=settings.INDUSTRIES,max_length=13,default="選択なし")
     occupation  = models.CharField(verbose_name="職種",choices=settings.OCCUPATIONS,max_length=17,default="選択なし")
     address = models.CharField(max_length=255, blank=True, null=True)
