@@ -217,7 +217,7 @@ class UpdateSeniorView(LoginRequiredMixin, UpdateView):
         context = Senior.objects.get(senior_id_id = self.request.user.pk)
         return context
     """
-    template_name = 'model_update.html'
+    template_name = 'senior_update.html'
     model = Senior
     fields = ['name', 'age', 'address','description']
     success_url = reverse_lazy('model_test')
@@ -284,5 +284,13 @@ def search_company_for_update(request):
         company = Company.objects.get(company_id_id=request.user.pk)
         return redirect('main_func:update_company',company.pk)
     except Company.DoesNotExist:
+        return None
+    
+def search_seior_for_update(request):
+    try:
+        print(f"request.user.pk:{request.user.pk}")
+        senior = Senior.objects.get(senior_id_id=request.user.pk)
+        return redirect('main_func:update_senior',senior.pk)
+    except Senior.DoesNotExist:
         return None
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>DjangoでTailwindCSSを使用する方法</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.12/dist/full.min.css" rel="stylesheet" type="text/css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% load static %}
+    <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}">
+  </head>
+  <body class="h-screen w-screen original-gradient">
+    <div class="flex justify-center items-center min-h-screen bg-white">
+      <form method="post" class="w-full max-w-md p-6 rounded-lg shadow-lg bg-white">
+          {% csrf_token %}
+          {% for field in form %}
+              <div class="mb-4">
+                <label class="text-black text-lg mb-2" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                <input class="border-2 border-black-100 bg-white w-full p-2 rounded-lg" type="{{ field.widget_type }}" name="{{ field.name }}" maxlength="150" autofocus required id="{{ field.id_for_label }}" value="">              
+              </div>
+              {% for error in field.errors %}
+                  <p class="text-red-500">{{ error }}</p>
+              {% endfor %}
+          {% endfor %}
+          <input class="btn btn-primary w-full mt-4 hover:text-white" type="submit" value="更新">
+      </form>
+    </div>
+  </body>
+</html>
