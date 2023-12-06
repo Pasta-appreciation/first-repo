@@ -78,7 +78,7 @@ def judge_list_view(request):
 
 #offering 側の一覧表示。つまり高齢者の一覧表示
 class SeniorListView(LoginRequiredMixin,ListView):
-    template_name = 'model_list.html'
+    template_name = 'list_view_offering.html'
     print("test")
     model = Senior
 
