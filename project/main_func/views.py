@@ -18,5 +18,9 @@ class CreateSeniorEntryView(LoginRequiredMixin,CreateView):
         entry.save()
         return super().form_valid(form)
     
-class Company_view(TemplateView):
+class CompanyMyView(TemplateView):
     template_name = 'mypage_offering.html'
+
+#def company_page(request, company_id):
+#    company = get_object_or_404(Company, pk=company_id)
+#    return render(request, 'my_page_offering.html', {'company': company})
