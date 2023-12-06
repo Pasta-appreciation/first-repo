@@ -4,3 +4,21 @@
     background-image: radial-gradient(#d6d6ce 0.35000000000000003px, #eef1f3 0.35000000000000003px);
     background-size: 7px 7px;
 }
+.grid-container {
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+    max-height: 100%;
+}
+  
+.grid-item-top {
+    grid-row: 1;
+}
+
+.grid-item-middle {
+    grid-row-start: 2;
+    grid-row-end: 10;
+}
+  
+.grid-item-bottom {
+    grid-row: 11;
+}
