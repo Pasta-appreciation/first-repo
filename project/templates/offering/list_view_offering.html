@@ -49,16 +49,17 @@
                 <!-- 年齢検索 -->
                 <div>
                     <label for="age" class="label-text">年齢</label>
-                    <input type="text" id="age" name="age" placeholder="歳"
+                    <input type="text" id="age" name="age" placeholder="歳以下"
                         class="input input-bordered w-full max-w-xs" />
                 </div>
                 <!-- 性別 -->
                 <div>
                     <label for="sex" class="label-text">性別</label>
                     <select id="sex" name="sex" class="select select-bordered w-full max-w-xs">
-                        <option value="man" selected>男性</option>
-                        <option value="female">女性</option>
-                        <option value="other">その他</option>
+                        <option value="選択無し" selected>選択無し</option>
+                        <option value="男性">男性</option>
+                        <option value="女性">女性</option>
+                        <option value="その他">その他</option>
                     </select>
                 </div>
                 <!-- エリア検索 -->
@@ -165,75 +166,6 @@
         </form>
     </section>
 
-    <!-- 旧検索 -->
-
-    <!-- <div class="grid grid-cols-1">
-    <form class="max-w-xl mx-auto px-0">
-      <label for="search-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-        Email</label> -->
-    <!-- Keywords -->
-    <!-- <div class="relative">
-    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-      <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512"
-        style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-        <style type="text/css">
-          .st0 {
-            fill: #4B4B4B;
-          }
-        </style>
-        <g>
-          <path class="st0"
-            d="M449.803,62.197C408.443,20.807,353.85-0.037,299.646-0.006C245.428-0.037,190.85,20.807,149.49,62.197
-                            C108.1,103.557,87.24,158.15,87.303,212.338c-0.047,37.859,10.359,75.766,30.547,109.359L15.021,424.525
-                            c-20.016,20.016-20.016,52.453,0,72.469c20,20.016,52.453,20.016,72.453,0L190.318,394.15
-                            c33.578,20.203,71.5,30.594,109.328,30.547c54.203,0.047,108.797-20.797,150.156-62.188
-                            c41.375-41.359,62.234-95.938,62.188-150.172C512.053,158.15,491.178,103.557,449.803,62.197z M391.818,304.541
-                            c-25.547,25.531-58.672,38.125-92.172,38.188c-33.5-0.063-66.609-12.656-92.188-38.188c-25.531-25.578-38.125-58.688-38.188-92.203
-                            c0.063-33.484,12.656-66.609,38.188-92.172c25.578-25.531,58.688-38.125,92.188-38.188c33.5,0.063,66.625,12.656,92.188,38.188
-                            c25.531,25.563,38.125,58.688,38.188,92.172C429.959,245.854,417.365,278.963,391.818,304.541z"
-            style="fill: rgb(75, 75, 75);"></path>
-        </g>
-      </svg>
-
-    </div>
-    <input type="text" id="search-icon"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="キーワードから検索">
-  </div> -->
-
-    <!-- Age -->
-    <!-- <div class="col-span-6 sm:col-span-3 py-3">
-    <label for="Age" class="block text-sm font-medium text-gray-700">
-      年齢
-    </label>
-
-    <input type="text" id="Age" name="age"
-      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-    </label>
-  </div> -->
-
-
-    <!-- Sex -->
-    <!-- <div class="mb-4">
-    <label for="gender" class="block text-sm font-medium text-gray-600">性別</label>
-    <select id="gender" name="gender" class="mt-1 p-2 block w-full border border-gray-300 rounded-md">
-      <option value="male">男性</option>
-      <option value="female">女性</option>
-      <option value="other">その他</option>
-    </select>
-  </div> -->
-
-    <!-- 検索ボタン -->
-    <!-- <div class="flex flex-col sm:items-center">
-    <button
-      class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
-      type="button">
-      この条件で検索
-    </button>
-  </div>
-  </div>  -->
-
     <!-- <h2>検索結果 2 人</h2> -->
     <!-- 検索結果 -->
     <div class="container mx-auto mt-8">
@@ -255,7 +187,7 @@
                     <div class="flex justify-end mt-2">
                         <a href="{% url 'main_func:detail_senior' entry.pk %}"
                             class="bg-blue-500 text-white px-4 py-2 rounded-full mr-2">詳細情報を見る</a>
-                        <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">連絡する</a>
+                        <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full">スカウト</a>
                     </div>
                 </div>
             </div>
