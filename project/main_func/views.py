@@ -88,12 +88,26 @@ class SeniorListView(LoginRequiredMixin,ListView):
         # フォームからのデータを取得
         keyword = self.request.GET.get('keyword', '')
         age = self.request.GET.get('age', '')
+        sex = self.request.GET.get('sex', '')
+        area = self.request.GET.get('area', '')
+        industry = self.request.GET.get('industry', '')
+        occupation = self.request.GET.get('occupation', '')
         # フィルタリング条件を設定
         filter_conditions = {}
-        if age != '':
-            filter_conditions['age__lte'] = age
         if keyword != '':
             filter_conditions['description__icontains'] = keyword
+        if age != '':
+            filter_conditions['age__lte'] = age
+        if sex != '選択無し':
+            filter_conditions['sex__icontains'] = sex
+        if area != '選択無し':
+            filter_conditions['address__icontains'] = area
+        if industry != '選択無し':
+            filter_conditions['industry__icontains'] = industry
+        if occupation != '選択無し':
+            filter_conditions['occupation__icontains'] = occupation
+
+
         
         # フィルタリングを適用
         if filter_conditions:
