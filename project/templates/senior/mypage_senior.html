@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <!-- Font Awesomeの読み込み -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>User Page</title>
+
 </head>
 <body class="bg-gray-100 font-sans text-gray-800">
 
@@ -12,13 +15,13 @@
         <div class="mx-auto px-4 py-2 sm:px-6 sm:py-4 lg:px-8 border bg-white">
           <div class="sm:flex sm:items-center sm:justify-between">
             {% load static %}
-            <div class="text-center sm:text-left w-1/6">
+            <div class="text-center sm:text-left w-1/2 sm:w-1/6">
               <img src="{% static 'imgs/logo.png' %}">
             </div>
             <div class="mt-4 flex flex-col gap-4 sm:mt-0 sm:flex-row sm:items-center">
                 <!-- ログインかログアウトか -->
                 <button
-                class="block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
+                class="block rounded-lg bg-indigo-600 px-3 sm:px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                 type="button">
                 ログイン
               </button>
@@ -29,21 +32,20 @@
 
     <div class="container mx-auto mt-8 flex flex-wrap justify-center">
         <!-- 上部のカード - プロフィール画像と個人情報 -->
-        <div class="w-full md:w-4/5 lg:w-2/3 bg-white rounded-lg overflow-hidden shadow-lg mb-8">
-            <div class="p-6 flex">
-                <div class="w-1/2">
-                    <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-gray-100 mx-auto">
+        <div class="sm:w-3/4 md:w-3/4 lg:w-3/4 bg-white rounded-lg overflow-hidden shadow-lg mb-8">
+            <div class="p-6 flex flex-col sm:flex-row">
+                <div class="w-full sm:w-1/2 mb-4 sm:mb-0">
+                    <div class="w-full h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-gray-100 mx-auto">
                         <img src="https://placekitten.com/150/150" alt="プロフィール画像" class="w-full h-full object-cover">
                     </div>
                 </div>
-                <div class="w-1/2 pl-8">
-                    <div class="mt-4 text-left">
-                        <h2 class="text-5xl font-semibold text-gray-800 mb-4 whitespace-nowrap overflow-ellipsis">山田 太郎</h2>
-                        <p class="text-3xl whitespace-nowrap overflow-ellipsis">年齢: 70歳　性別: 男性</p>
-                        <p class="text-3xl whitespace-nowrap overflow-ellipsis">業種: 流通・小売・フード</p>
-                        <p class="text-3xl whitespace-nowrap overflow-ellipsis">職種: クリエイティブ</p>
-                    </div>
-                </div>
+                <div class="mt-4 text-left">
+                    <h2 class="text-5xl font-semibold text-gray-800 mb-4"><i class="fas fa-user"></i>山田 太郎</h2>
+                    <p class="text-3xl text-gray-500 mb-2">年齢: <span class="text-gray-800">70歳</span></p>
+                    <p class="text-3xl text-gray-500 mb-2"><i class="fas fa-mars"></i> 性別: <span class="text-gray-800">男性</span></p>
+                    <p class="text-3xl text-gray-500 mb-2"><i class="fas fa-industry"></i> 業種: <span class="text-gray-800">流通・小売・フード</span></p>
+                    <p class="text-3xl text-gray-500 mb-2"><i class="fas fa-paint-brush"></i> 職種: <span class="text-gray-800">クリエイティブ</span></p>
+                </div>                
             </div>
         </div>
 
