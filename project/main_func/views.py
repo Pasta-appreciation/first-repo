@@ -202,7 +202,7 @@ class UpdateCompanyView(LoginRequiredMixin, UpdateView):
     template_name = 'company_update.html'
     model = Company
     fields = ['name', 'address', 'industry', 'homepage_url', 'description']
-    success_url = reverse_lazy('model_test')
+    success_url = reverse_lazy('main_func:search_company_update')
 
 class UpdateJobView(LoginRequiredMixin, UpdateView):
     template_name = 'model_update.html'
@@ -220,7 +220,7 @@ class UpdateSeniorView(LoginRequiredMixin, UpdateView):
     template_name = 'senior_update.html'
     model = Senior
     fields = ['name', 'age', 'address','description']
-    success_url = reverse_lazy('model_test')
+    success_url = reverse_lazy('main_func:search_senior_update')
 
 
 ############################################################################################################
